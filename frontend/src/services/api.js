@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = '/api';
+const BASE_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -10,7 +10,11 @@ const api = axios.create({
 
 // ─── Train APIs ──────────────────────────────────────────────────────────────
 
-export const listTrains = () => api.get('/trains/').then(r => r.data);
+export const listTrains = (includeLive = false) =>
+  api.get('/trains/', { params: includeLive ? { include_live: true } : {} }).then(r => r.data);
+
+export const getLiveTrains = (status) =>
+  api.get('/trains/live', { params: status ? { status } : {} }).then(r => r.data);
 
 export const searchTrains = (query) =>
   api.get('/trains/search', { params: { q: query } }).then(r => r.data);

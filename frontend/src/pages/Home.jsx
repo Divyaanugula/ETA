@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Search, Train, Zap, BarChart2, MapPin, RefreshCw, AlertCircle, ChevronRight, Clock, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Train, Zap, BarChart2, MapPin, RefreshCw, AlertCircle, ChevronRight, Clock, X, Radio } from 'lucide-react';
 import { getTrainStatus, getETAPrediction, getDelayHistory } from '../services/api';
 import { getMockStatus, getMockPrediction, getMockDelayHistory, MOCK_TRAINS } from '../data/mockData';
 
@@ -14,16 +15,19 @@ import LiveClock from '../components/LiveClock';
 import AIExplanationSuite from '../components/AIExplanationSuite';
 
 const QUICK_TRAINS = [
-  { no: '12723', name: 'Telangana Express', route: 'HYB → NLR' },
-  { no: '12759', name: 'Charminar Express', route: 'HYB → MAS' },
-  { no: '17201', name: 'Golconda Express',  route: 'SC → MAS' },
+  { no: '20607', name: 'Vande Bharat', route: 'MAS → MYS' },
+  { no: '12951', name: 'Tejas Rajdhani', route: 'MMCT → NDLS' },
+  { no: '12723', name: 'Telangana Exp', route: 'HYB → NDLS' },
+  { no: '22691', name: 'Bengaluru Rajdhani', route: 'SBC → NZM' },
+  { no: '17201', name: 'Golconda Exp',  route: 'SC → GNT' },
+  { no: '12841', name: 'Coromandel Exp', route: 'HWH → MAS' },
 ];
 
 const LIVE_STATS = [
-  { label: 'Trains Monitored', value: 5, suffix: '', color: 'text-blue-400' },
-  { label: 'Avg Delay Today', value: 18, suffix: ' min', color: 'text-amber-400' },
-  { label: 'On-Time Rate', value: 38, suffix: '%', color: 'text-red-400' },
-  { label: 'Predictions Run', value: 142, suffix: '', color: 'text-emerald-400' },
+  { label: 'Trains Monitored', value: 21, suffix: '+', color: 'text-blue-400' },
+  { label: 'Avg Delay Today', value: 14, suffix: ' min', color: 'text-amber-400' },
+  { label: 'On-Time Rate', value: 68, suffix: '%', color: 'text-emerald-400' },
+  { label: 'Predictions Run', value: 320, suffix: '', color: 'text-cyan-400' },
 ];
 
 function AnimatedCounter({ target, suffix, duration = 1200 }) {
@@ -42,6 +46,7 @@ function AnimatedCounter({ target, suffix, duration = 1200 }) {
 }
 
 export default function Home({ backendOnline }) {
+  const navigate = useNavigate();
   const [inputVal, setInputVal] = useState('');
   const [trainNo, setTrainNo] = useState('');
   const [status, setStatus] = useState(null);
@@ -205,8 +210,8 @@ export default function Home({ backendOnline }) {
               </button>
             </div>
 
-            {/* Quick select */}
-            <div className="mt-3 flex flex-wrap gap-2">
+            {/* Quick select and Live Fleet button */}
+            <div className="mt-3 flex flex-wrap items-center gap-2">
               <span className="text-slate-400 text-xs self-center">Quick:</span>
               {QUICK_TRAINS.map(t => (
                 <button
@@ -217,6 +222,13 @@ export default function Home({ backendOnline }) {
                   {t.no} – {t.name}
                 </button>
               ))}
+              <button
+                onClick={() => navigate('/live')}
+                className="text-xs px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 rounded-lg transition-all flex items-center gap-1 font-semibold"
+              >
+                <Radio size={12} className="text-emerald-400 animate-pulse" />
+                Track All Running Trains Live →
+              </button>
             </div>
 
             {/* Recently Tracked */}

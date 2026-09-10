@@ -4,13 +4,14 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
 } from 'recharts';
-import { MOCK_DELAY_HISTORY, MOCK_STATUS } from '../data/mockData';
+import { MOCK_DELAY_HISTORY, MOCK_STATUS, MOCK_TRAINS } from '../data/mockData';
 
-const TRAIN_OPTIONS = [
-  { no: '12723', name: 'Telangana Express', from: 'HYB', to: 'NLR' },
-  { no: '12759', name: 'Charminar Express', from: 'HYB', to: 'MAS' },
-  { no: '17201', name: 'Golconda Express',  from: 'SC',  to: 'MAS' },
-];
+const TRAIN_OPTIONS = MOCK_TRAINS.map(t => ({
+  no: t.train_no,
+  name: t.train_name,
+  from: t.from_code,
+  to: t.to_code
+}));
 
 const TRAIN_STATS = {
   '12723': {
@@ -90,9 +91,27 @@ export default function History() {
   const [dropOpen, setDropOpen] = useState(false);
 
   const train = TRAIN_OPTIONS.find(t => t.no === selectedTrain);
-  const stats = TRAIN_STATS[selectedTrain];
-  const histData = Object.entries(MOCK_DELAY_HISTORY[selectedTrain]?.avg_delay_by_station || {})
-    .map(([k, v]) => ({ station: k, avgDelay: v }));
+  const stats = TRAIN_STATS[selectedTrain] || {
+    avgDelay: '9.5 min', onTimeRate: 75, worstDelay: '24 min', runs: 6,
+    recentRuns: [
+      { date: 'Sep 9', delay: 4, status: 'Delayed' },
+      { date: 'Sep 8', delay: 0, status: 'On Time' },
+      { date: 'Sep 7', delay: 6, status: 'Delayed' },
+      { date: 'Sep 6', delay: 0, status: 'On Time' },
+      { date: 'Sep 5', delay: 10, status: 'Delayed' },
+      { date: 'Sep 4', delay: 0, status: 'On Time' },
+    ],
+    donut: [
+      { name: 'On Time', value: 75, color: '#22c55e' },
+      { name: 'Minor (<15m)', value: 16, color: '#f59e0b' },
+      { name: 'Moderate (15–30m)', value: 6, color: '#f97316' },
+      { name: 'Major (>30m)', value: 3, color: '#ef4444' },
+    ],
+  };
+  const rawHist = Object.entries(MOCK_DELAY_HISTORY[selectedTrain]?.avg_delay_by_station || {});
+  const histData = (rawHist.length > 0 ? rawHist : [
+    [train?.from || 'ORIG', 0], ['KPD', 2], ['JTJ', 4], [train?.to || 'DEST', 6]
+  ]).map(([k, v]) => ({ station: k, avgDelay: v }));
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">

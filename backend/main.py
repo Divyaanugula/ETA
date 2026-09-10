@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from typing import List, Optional
 import sys
@@ -12,7 +14,7 @@ from database.db import get_db, init_db
 from database.seed import seed_database
 from services.train_service import (
     search_trains, get_train_status, get_upcoming_stations,
-    get_eta_prediction, get_delay_history
+    get_eta_prediction, get_delay_history, get_all_running_trains
 )
 
 app = FastAPI(
@@ -30,6 +32,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Unified Frontend Dist Path
+DIST_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist"))
+
+if os.path.exists(DIST_DIR):
+    assets_dir = os.path.join(DIST_DIR, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -41,10 +51,14 @@ async def startup_event():
         print(f"Seed skipped (may already exist): {e}")
 
 
-# ─── Health ────────────────────────────────────────────────────────────────────
+# ─── Health & Home ────────────────────────────────────────────────────────────
 
 @app.get("/", tags=["Health"])
 def root():
+    if os.path.exists(DIST_DIR):
+        index_file = os.path.join(DIST_DIR, "index.html")
+        if os.path.isfile(index_file):
+            return FileResponse(index_file)
     return {"message": "RailETA API is running 🚂", "version": "1.0.0"}
 
 
@@ -56,8 +70,11 @@ def health():
 # ─── Trains ────────────────────────────────────────────────────────────────────
 
 @app.get("/api/trains/", tags=["Trains"])
-def list_trains(db: Session = Depends(get_db)):
-    """List all available trains."""
+def list_trains(include_live: bool = False, db: Session = Depends(get_db)):
+    """List all available trains, optionally with live status."""
+    if include_live:
+        return get_all_running_trains(db)
+
     from database.db import Train
     trains = db.query(Train).filter(Train.is_active == True).all()
     return [
@@ -72,6 +89,24 @@ def list_trains(db: Session = Depends(get_db)):
         }
         for t in trains
     ]
+
+
+@app.get("/api/trains/live", tags=["Trains"])
+@app.get("/api/trains/running", tags=["Trains"])
+def live_trains(status: Optional[str] = None, db: Session = Depends(get_db)):
+    """Get all trains with their real-time live telemetry, speeds, locations, and delay causes."""
+    all_trains = get_all_running_trains(db)
+    if status and status.lower() != "all":
+        target = status.lower()
+        if target == "running":
+            all_trains = [t for t in all_trains if t.get("live", {}).get("status", "").lower() == "running"]
+        elif target == "halted":
+            all_trains = [t for t in all_trains if t.get("live", {}).get("status", "").lower() == "halted"]
+        elif target == "delayed":
+            all_trains = [t for t in all_trains if t.get("live", {}).get("current_delay_minutes", 0) > 10]
+        elif target in ("on_time", "ontime"):
+            all_trains = [t for t in all_trains if t.get("live", {}).get("current_delay_minutes", 0) == 0]
+    return all_trains
 
 
 @app.get("/api/trains/search", tags=["Trains"])
@@ -194,3 +229,20 @@ def delay_history(train_no: str, db: Session = Depends(get_db)):
     """Get historical delay data for analytics and trend charts."""
     history = get_delay_history(db, train_no)
     return history
+
+
+# ─── SPA Static Files & Fallback ──────────────────────────────────────────────
+
+@app.get("/{full_path:path}", include_in_schema=False)
+def serve_spa_or_static(full_path: str):
+    if full_path.startswith("api"):
+        raise HTTPException(status_code=404, detail="API endpoint not found")
+    if os.path.exists(DIST_DIR):
+        file_path = os.path.join(DIST_DIR, full_path)
+        if os.path.isfile(file_path):
+            return FileResponse(file_path)
+        index_file = os.path.join(DIST_DIR, "index.html")
+        if os.path.isfile(index_file):
+            return FileResponse(index_file)
+    raise HTTPException(status_code=404, detail="Not Found")
+
