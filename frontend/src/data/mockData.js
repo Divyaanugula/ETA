@@ -2,80 +2,114 @@
 // Used when the backend is unavailable.
 
 export const MOCK_TRAINS = [
-  { train_no: "12723", train_name: "Telangana Express", from_station: "Hyderabad", from_code: "HYB", to_station: "Nellore", to_code: "NLR", train_type: "Superfast Express" },
-  { train_no: "12759", train_name: "Charminar Express", from_station: "Hyderabad", from_code: "HYB", to_station: "Chennai Central", to_code: "MAS", train_type: "Superfast Express" },
-  { train_no: "17201", train_name: "Golconda Express", from_station: "Secunderabad", from_code: "SC", to_station: "Chennai Central", to_code: "MAS", train_type: "Express" },
-  { train_no: "12649", train_name: "Karnataka Sampark Kranti", from_station: "New Delhi", from_code: "NDLS", to_station: "Vijayawada", to_code: "BZA", train_type: "Superfast Express" },
-  { train_no: "12724", train_name: "Telangana Express (Return)", from_station: "Nellore", from_code: "NLR", to_station: "Hyderabad", to_code: "HYB", train_type: "Superfast Express" },
+  { train_no: "20607", train_name: "Vande Bharat Express", from_station: "MGR Chennai Central", from_code: "MAS", to_station: "Mysuru Jn", to_code: "MYS", train_type: "Vande Bharat" },
+  { train_no: "22436", train_name: "Vande Bharat Express", from_station: "New Delhi", from_code: "NDLS", to_station: "Varanasi Jn", to_code: "BSB", train_type: "Vande Bharat" },
+  { train_no: "12002", train_name: "Bhopal Shatabdi Express", from_station: "New Delhi", from_code: "NDLS", to_station: "Rani Kamlapati", to_code: "RKMP", train_type: "Shatabdi Express" },
+  { train_no: "12951", train_name: "Mumbai Tejas Rajdhani", from_station: "Mumbai Central", from_code: "MMCT", to_station: "New Delhi", to_code: "NDLS", train_type: "Rajdhani Express" },
+  { train_no: "12301", train_name: "Howrah Rajdhani Express", from_station: "Howrah Jn", from_code: "HWH", to_station: "New Delhi", to_code: "NDLS", train_type: "Rajdhani Express" },
+  { train_no: "22691", train_name: "Bengaluru Rajdhani Express", from_station: "KSR Bengaluru City", from_code: "SBC", to_station: "Hazrat Nizamuddin", to_code: "NZM", train_type: "Rajdhani Express" },
+  { train_no: "12723", train_name: "Telangana Express", from_station: "Hyderabad Deccan", from_code: "HYB", to_station: "New Delhi", to_code: "NDLS", train_type: "Superfast Express" },
+  { train_no: "12724", train_name: "Telangana Express (Return)", from_station: "New Delhi", from_code: "NDLS", to_station: "Hyderabad Deccan", to_code: "HYB", train_type: "Superfast Express" },
+  { train_no: "12759", train_name: "Charminar Express", from_station: "Hyderabad Deccan", from_code: "HYB", to_station: "MGR Chennai Central", to_code: "MAS", train_type: "Superfast Express" },
+  { train_no: "17201", train_name: "Golconda Express", from_station: "Secunderabad Jn", from_code: "SC", to_station: "Guntur Jn", to_code: "GNT", train_type: "Express" },
+  { train_no: "12841", train_name: "Coromandel Express", from_station: "Howrah Jn", from_code: "HWH", to_station: "MGR Chennai Central", to_code: "MAS", train_type: "Superfast Express" },
+  { train_no: "12615", train_name: "Grand Trunk (GT) Express", from_station: "MGR Chennai Central", from_code: "MAS", to_station: "New Delhi", to_code: "NDLS", train_type: "Superfast Express" },
+  { train_no: "12626", train_name: "Kerala Express", from_station: "New Delhi", from_code: "NDLS", to_station: "Thiruvananthapuram Central", to_code: "TVC", train_type: "Superfast Express" },
+  { train_no: "12245", train_name: "Howrah - Yesvantpur Duronto", from_station: "Howrah Jn", from_code: "HWH", to_station: "Yesvantpur Jn", to_code: "YPR", train_type: "Duronto Express" },
+  { train_no: "12431", train_name: "Trivandrum Rajdhani", from_station: "Thiruvananthapuram Central", from_code: "TVC", to_station: "Hazrat Nizamuddin", to_code: "NZM", train_type: "Rajdhani Express" },
+  { train_no: "12137", train_name: "Punjab Mail", from_station: "Mumbai CSMT", from_code: "CSMT", to_station: "New Delhi", to_code: "NDLS", train_type: "Superfast Express" },
+  { train_no: "12009", train_name: "Mumbai - Ahmedabad Shatabdi", from_station: "Mumbai Central", from_code: "MMCT", to_station: "Ahmedabad Jn", to_code: "ADI", train_type: "Shatabdi Express" },
+  { train_no: "12925", train_name: "Paschim Express", from_station: "Mumbai Central", from_code: "MMCT", to_station: "Amritsar Jn", to_code: "ASR", train_type: "Superfast Express" },
+  { train_no: "12649", train_name: "Karnataka Sampark Kranti", from_station: "Yesvantpur Jn", from_code: "YPR", to_station: "Hazrat Nizamuddin", to_code: "NZM", train_type: "Superfast Express" },
+  { train_no: "12801", train_name: "Purushottam Express", from_station: "Bhubaneswar", from_code: "HWH", to_station: "New Delhi", to_code: "NDLS", train_type: "Superfast Express" },
+  { train_no: "12269", train_name: "Chennai Duronto Express", from_station: "MGR Chennai Central", from_code: "MAS", to_station: "Hazrat Nizamuddin", to_code: "NZM", train_type: "Duronto Express" },
 ];
 
 export const MOCK_STATUS = {
+  "20607": {
+    train_no: "20607", train_name: "Vande Bharat Express", from_station: "MGR Chennai Central", from_code: "MAS", to_station: "Mysuru Jn", to_code: "MYS", train_type: "Vande Bharat",
+    live: { current_station_code: "KPD", current_station_name: "Katpadi Jn", current_delay_minutes: 2, current_speed_kmh: 115.0, distance_to_next_station: 85, status: "Running", last_updated: "Just now", track_congestion: 0.10, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Running on Schedule — Clear line & green signals" }
+  },
+  "22436": {
+    train_no: "22436", train_name: "Vande Bharat Express", from_station: "New Delhi", from_code: "NDLS", to_station: "Varanasi Jn", to_code: "BSB", train_type: "Vande Bharat",
+    live: { current_station_code: "CNB", current_station_name: "Kanpur Central", current_delay_minutes: 0, current_speed_kmh: 128.0, distance_to_next_station: 194, status: "Running", last_updated: "Just now", track_congestion: 0.12, weather_factor: 0.05, speed_restriction: false, primary_delay_reason: "High Speed Priority Corridor Clearance" }
+  },
+  "12002": {
+    train_no: "12002", train_name: "Bhopal Shatabdi Express", from_station: "New Delhi", from_code: "NDLS", to_station: "Rani Kamlapati", to_code: "RKMP", train_type: "Shatabdi Express",
+    live: { current_station_code: "GWL", current_station_name: "Gwalior Jn", current_delay_minutes: 6, current_speed_kmh: 98.0, distance_to_next_station: 98, status: "Running", last_updated: "Just now", track_congestion: 0.22, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Station Dwell & Passenger Boarding (+4m)" }
+  },
+  "12951": {
+    train_no: "12951", train_name: "Mumbai Tejas Rajdhani", from_station: "Mumbai Central", from_code: "MMCT", to_station: "New Delhi", to_code: "NDLS", train_type: "Rajdhani Express",
+    live: { current_station_code: "BRC", current_station_name: "Vadodara Jn", current_delay_minutes: 4, current_speed_kmh: 112.0, distance_to_next_station: 392, status: "Running", last_updated: "Just now", track_congestion: 0.18, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Fast line progression via WR Trunk Route" }
+  },
+  "12301": {
+    train_no: "12301", train_name: "Howrah Rajdhani Express", from_station: "Howrah Jn", from_code: "HWH", to_station: "New Delhi", to_code: "NDLS", train_type: "Rajdhani Express",
+    live: { current_station_code: "PRYJ", current_station_name: "Prayagraj Jn", current_delay_minutes: 14, current_speed_kmh: 104.0, distance_to_next_station: 194, status: "Running", last_updated: "Just now", track_congestion: 0.38, weather_factor: 0.15, speed_restriction: false, primary_delay_reason: "Dense freight traffic regulation on Grand Chord" }
+  },
+  "22691": {
+    train_no: "22691", train_name: "Bengaluru Rajdhani Express", from_station: "KSR Bengaluru City", from_code: "SBC", to_station: "Hazrat Nizamuddin", to_code: "NZM", train_type: "Rajdhani Express",
+    live: { current_station_code: "SC", current_station_name: "Secunderabad Jn", current_delay_minutes: 8, current_speed_kmh: 88.0, distance_to_next_station: 132, status: "Running", last_updated: "Just now", track_congestion: 0.25, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Platform Interlocking Clearance at Secunderabad" }
+  },
   "12723": {
-    train_no: "12723",
-    train_name: "Telangana Express",
-    from_station: "Hyderabad",
-    from_code: "HYB",
-    to_station: "Nellore",
-    to_code: "NLR",
-    train_type: "Superfast Express",
-    live: {
-      current_station_code: "HYB",
-      current_station_name: "Hyderabad",
-      current_delay_minutes: 18,
-      current_speed_kmh: 62.0,
-      distance_to_next_station: 148,
-      status: "Running",
-      last_updated: "10:18 PM",
-      track_congestion: 0.35,
-      weather_factor: 0.1,
-      speed_restriction: false,
-      primary_delay_reason: "Signal Precedence Hold at Kazipet Outer (+10m)",
-    },
+    train_no: "12723", train_name: "Telangana Express", from_station: "Hyderabad Deccan", from_code: "HYB", to_station: "New Delhi", to_code: "NDLS", train_type: "Superfast Express",
+    live: { current_station_code: "WL", current_station_name: "Warangal", current_delay_minutes: 18, current_speed_kmh: 62.0, distance_to_next_station: 56, status: "Running", last_updated: "Just now", track_congestion: 0.35, weather_factor: 0.1, speed_restriction: false, primary_delay_reason: "Signal Precedence Hold at Kazipet Outer (+10m)" }
+  },
+  "12724": {
+    train_no: "12724", train_name: "Telangana Express (Return)", from_station: "New Delhi", from_code: "NDLS", to_station: "Hyderabad Deccan", to_code: "HYB", train_type: "Superfast Express",
+    live: { current_station_code: "AGC", current_station_name: "Agra Cantt", current_delay_minutes: 25, current_speed_kmh: 75.0, distance_to_next_station: 216, status: "Running", last_updated: "Just now", track_congestion: 0.42, weather_factor: 0.2, speed_restriction: true, primary_delay_reason: "Speed restriction & caution order in NCR section" }
   },
   "12759": {
-    train_no: "12759",
-    train_name: "Charminar Express",
-    from_station: "Hyderabad",
-    from_code: "HYB",
-    to_station: "Chennai Central",
-    to_code: "MAS",
-    train_type: "Superfast Express",
-    live: {
-      current_station_code: "KZJ",
-      current_station_name: "Kazipet",
-      current_delay_minutes: 5,
-      current_speed_kmh: 85.0,
-      distance_to_next_station: 9,
-      status: "Running",
-      last_updated: "10:22 PM",
-      track_congestion: 0.15,
-      weather_factor: 0.0,
-      speed_restriction: false,
-      primary_delay_reason: "Yard Throat Interlocking Cross-Over (+3m)",
-    },
+    train_no: "12759", train_name: "Charminar Express", from_station: "Hyderabad Deccan", from_code: "HYB", to_station: "MGR Chennai Central", to_code: "MAS", train_type: "Superfast Express",
+    live: { current_station_code: "KZJ", current_station_name: "Kazipet Jn", current_delay_minutes: 5, current_speed_kmh: 85.0, distance_to_next_station: 9, status: "Running", last_updated: "Just now", track_congestion: 0.15, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Yard Throat Interlocking Cross-Over (+3m)" }
   },
   "17201": {
-    train_no: "17201",
-    train_name: "Golconda Express",
-    from_station: "Secunderabad",
-    from_code: "SC",
-    to_station: "Chennai Central",
-    to_code: "MAS",
-    train_type: "Express",
-    live: {
-      current_station_code: "BZA",
-      current_station_name: "Vijayawada",
-      current_delay_minutes: 32,
-      current_speed_kmh: 0.0,
-      distance_to_next_station: 195,
-      status: "Halted",
-      last_updated: "10:05 PM",
-      track_congestion: 0.6,
-      weather_factor: 0.25,
-      speed_restriction: true,
-      primary_delay_reason: "Platform #1 Occupancy Contention at Vijayawada Outer (+18m)",
-    },
+    train_no: "17201", train_name: "Golconda Express", from_station: "Secunderabad Jn", from_code: "SC", to_station: "Guntur Jn", to_code: "GNT", train_type: "Express",
+    live: { current_station_code: "BZA", current_station_name: "Vijayawada Jn", current_delay_minutes: 32, current_speed_kmh: 0.0, distance_to_next_station: 32, status: "Halted", last_updated: "Just now", track_congestion: 0.60, weather_factor: 0.25, speed_restriction: true, primary_delay_reason: "Platform #1 Occupancy Contention at Vijayawada Outer (+18m)" }
   },
+  "12841": {
+    train_no: "12841", train_name: "Coromandel Express", from_station: "Howrah Jn", from_code: "HWH", to_station: "MGR Chennai Central", to_code: "MAS", train_type: "Superfast Express",
+    live: { current_station_code: "VSKP", current_station_name: "Visakhapatnam Jn", current_delay_minutes: 0, current_speed_kmh: 102.0, distance_to_next_station: 349, status: "Running", last_updated: "Just now", track_congestion: 0.15, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "On Schedule · Clear coastal corridor" }
+  },
+  "12615": {
+    train_no: "12615", train_name: "Grand Trunk (GT) Express", from_station: "MGR Chennai Central", from_code: "MAS", to_station: "New Delhi", to_code: "NDLS", train_type: "Superfast Express",
+    live: { current_station_code: "NGP", current_station_name: "Nagpur Jn", current_delay_minutes: 12, current_speed_kmh: 82.0, distance_to_next_station: 390, status: "Running", last_updated: "Just now", track_congestion: 0.28, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Ghat section speed deceleration (+8m)" }
+  },
+  "12626": {
+    train_no: "12626", train_name: "Kerala Express", from_station: "New Delhi", from_code: "NDLS", to_station: "Thiruvananthapuram Central", to_code: "TVC", train_type: "Superfast Express",
+    live: { current_station_code: "ET", current_station_name: "Itarsi Jn", current_delay_minutes: 22, current_speed_kmh: 74.0, distance_to_next_station: 298, status: "Running", last_updated: "Just now", track_congestion: 0.40, weather_factor: 0.15, speed_restriction: false, primary_delay_reason: "Heavy traffic bottleneck around Itarsi Junction" }
+  },
+  "12245": {
+    train_no: "12245", train_name: "Howrah - Yesvantpur Duronto", from_station: "Howrah Jn", from_code: "HWH", to_station: "Yesvantpur Jn", to_code: "YPR", train_type: "Duronto Express",
+    live: { current_station_code: "BBS", current_station_name: "Bhubaneswar", current_delay_minutes: 0, current_speed_kmh: 118.0, distance_to_next_station: 443, status: "Running", last_updated: "Just now", track_congestion: 0.08, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Non-stop priority line clearance" }
+  },
+  "12431": {
+    train_no: "12431", train_name: "Trivandrum Rajdhani", from_station: "Thiruvananthapuram Central", from_code: "TVC", to_station: "Hazrat Nizamuddin", to_code: "NZM", train_type: "Rajdhani Express",
+    live: { current_station_code: "ERS", current_station_name: "Ernakulam Jn", current_delay_minutes: 7, current_speed_kmh: 95.0, distance_to_next_station: 450, status: "Running", last_updated: "Just now", track_congestion: 0.20, weather_factor: 0.1, speed_restriction: false, primary_delay_reason: "Monsoon caution speed order along coastal stretch" }
+  },
+  "12137": {
+    train_no: "12137", train_name: "Punjab Mail", from_station: "Mumbai CSMT", from_code: "CSMT", to_station: "New Delhi", to_code: "NDLS", train_type: "Superfast Express",
+    live: { current_station_code: "ET", current_station_name: "Itarsi Jn", current_delay_minutes: 15, current_speed_kmh: 68.0, distance_to_next_station: 92, status: "Running", last_updated: "Just now", track_congestion: 0.32, weather_factor: 0.05, speed_restriction: false, primary_delay_reason: "Precedence given to Rajdhani Express (+12m)" }
+  },
+  "12009": {
+    train_no: "12009", train_name: "Mumbai - Ahmedabad Shatabdi", from_station: "Mumbai Central", from_code: "MMCT", to_station: "Ahmedabad Jn", to_code: "ADI", train_type: "Shatabdi Express",
+    live: { current_station_code: "ST", current_station_name: "Surat", current_delay_minutes: 3, current_speed_kmh: 120.0, distance_to_next_station: 129, status: "Running", last_updated: "Just now", track_congestion: 0.14, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "High speed cruising on Western line" }
+  },
+  "12925": {
+    train_no: "12925", train_name: "Paschim Express", from_station: "Mumbai Central", from_code: "MMCT", to_station: "Amritsar Jn", to_code: "ASR", train_type: "Superfast Express",
+    live: { current_station_code: "KOTA", current_station_name: "Kota Jn", current_delay_minutes: 45, current_speed_kmh: 0.0, distance_to_next_station: 466, status: "Halted", last_updated: "Just now", track_congestion: 0.65, weather_factor: 0.3, speed_restriction: true, primary_delay_reason: "Locomotive safety inspection & yard regulation hold" }
+  },
+  "12649": {
+    train_no: "12649", train_name: "Karnataka Sampark Kranti", from_station: "Yesvantpur Jn", from_code: "YPR", to_station: "Hazrat Nizamuddin", to_code: "NZM", train_type: "Superfast Express",
+    live: { current_station_code: "BPQ", current_station_name: "Balharshah Jn", current_delay_minutes: 16, current_speed_kmh: 78.0, distance_to_next_station: 208, status: "Running", last_updated: "Just now", track_congestion: 0.30, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Goods rake crossing precedence at junction" }
+  },
+  "12801": {
+    train_no: "12801", train_name: "Purushottam Express", from_station: "Bhubaneswar", from_code: "HWH", to_station: "New Delhi", to_code: "NDLS", train_type: "Superfast Express",
+    live: { current_station_code: "CNB", current_station_name: "Kanpur Central", current_delay_minutes: 35, current_speed_kmh: 52.0, distance_to_next_station: 440, status: "Running", last_updated: "Just now", track_congestion: 0.55, weather_factor: 0.2, speed_restriction: true, primary_delay_reason: "Heavy traffic density in Northern Railway zone" }
+  },
+  "12269": {
+    train_no: "12269", train_name: "Chennai Duronto Express", from_station: "MGR Chennai Central", from_code: "MAS", to_station: "Hazrat Nizamuddin", to_code: "NZM", train_type: "Duronto Express",
+    live: { current_station_code: "BZA", current_station_name: "Vijayawada Jn", current_delay_minutes: 0, current_speed_kmh: 110.0, distance_to_next_station: 659, status: "Running", last_updated: "Just now", track_congestion: 0.05, weather_factor: 0.0, speed_restriction: false, primary_delay_reason: "Clear green aspect on high-priority express corridor" }
+  }
 };
 
 export const MOCK_PREDICTION = {
@@ -392,14 +426,155 @@ export const MOCK_DELAY_HISTORY = {
   },
 };
 
+export function getMockLiveTrains(statusFilter = 'all') {
+  let trains = MOCK_TRAINS.map(t => {
+    const status = MOCK_STATUS[t.train_no];
+    return {
+      ...t,
+      live: status ? status.live : {
+        current_station_code: t.from_code,
+        current_station_name: t.from_station,
+        current_delay_minutes: 0,
+        current_speed_kmh: 80.0,
+        distance_to_next_station: 60,
+        status: "Running",
+        last_updated: "Just now",
+        track_congestion: 0.15,
+        weather_factor: 0.0,
+        speed_restriction: false,
+        primary_delay_reason: "Clear green aspect on main route",
+      }
+    };
+  });
+
+  if (statusFilter && statusFilter !== 'all') {
+    const filter = statusFilter.toLowerCase();
+    if (filter === 'running') {
+      trains = trains.filter(t => t.live.status === 'Running');
+    } else if (filter === 'halted') {
+      trains = trains.filter(t => t.live.status === 'Halted');
+    } else if (filter === 'delayed') {
+      trains = trains.filter(t => (t.live.current_delay_minutes || 0) > 10);
+    } else if (filter === 'ontime' || filter === 'on_time') {
+      trains = trains.filter(t => (t.live.current_delay_minutes || 0) === 0);
+    }
+  }
+
+  return trains;
+}
+
 export function getMockStatus(trainNo) {
-  return MOCK_STATUS[trainNo] || null;
+  if (MOCK_STATUS[trainNo]) {
+    return MOCK_STATUS[trainNo];
+  }
+  const meta = MOCK_TRAINS.find(t => t.train_no === trainNo);
+  const fromName = meta?.from_station || "Origin Station";
+  const toName = meta?.to_station || "Destination Station";
+  return {
+    train_no: trainNo,
+    train_name: meta?.train_name || `Express ${trainNo}`,
+    from_station: fromName,
+    from_code: meta?.from_code || "ORIG",
+    to_station: toName,
+    to_code: meta?.to_code || "DEST",
+    train_type: meta?.train_type || "Superfast Express",
+    live: {
+      current_station_code: meta?.from_code || "ORIG",
+      current_station_name: fromName,
+      current_delay_minutes: 5,
+      current_speed_kmh: 88.0,
+      distance_to_next_station: 45,
+      status: "Running",
+      last_updated: "Just now",
+      track_congestion: 0.2,
+      weather_factor: 0.0,
+      speed_restriction: false,
+      primary_delay_reason: "Scheduled operational clearance",
+    },
+  };
 }
 
 export function getMockPrediction(trainNo) {
-  return MOCK_PREDICTION[trainNo] || null;
+  if (MOCK_PREDICTION[trainNo]) {
+    return MOCK_PREDICTION[trainNo];
+  }
+  const status = getMockStatus(trainNo);
+  const delay = status.live?.current_delay_minutes || 0;
+  return {
+    train_no: trainNo,
+    train_name: status.train_name,
+    total_expected_delay: delay + 4,
+    prediction_confidence: 0.89,
+    current_speed: status.live?.current_speed_kmh || 85.0,
+    station_etas: [
+      { stop_number: 1, station_code: status.from_code, station_name: status.from_station, scheduled_arrival: "Starts", predicted_arrival: "Starts", delay_minutes: 0, status: "Passed", distance_from_origin: 0 },
+      { stop_number: 2, station_code: status.live?.current_station_code || "STN1", station_name: status.live?.current_station_name || "Mid Junction", scheduled_arrival: "11:30 AM", predicted_arrival: "11:35 AM", delay_minutes: delay, status: "Current", distance_from_origin: 180 },
+      { stop_number: 3, station_code: status.to_code, station_name: status.to_station, scheduled_arrival: "05:00 PM", predicted_arrival: "05:09 PM", delay_minutes: delay + 4, status: "Delayed", distance_from_origin: 520 },
+    ],
+    factors_applied: {
+      current_delay_minutes: delay,
+      track_congestion: "20%",
+      weather_severity: "0%",
+      speed_restriction_active: false,
+      unscheduled_stop_probability: "5% per station",
+      historical_data_stations: 3,
+    },
+    anomaly_detection: {
+      level: delay > 15 ? "MODERATE" : "NOMINAL",
+      anomaly_score: delay > 15 ? 38 : 12,
+      schedule_divergence: delay > 15 ? "1.2σ" : "0.3σ",
+      detected_issues: delay > 15 ? [{ type: "Minor Delay Drift", severity: "Low", message: `Trailing +${delay}m baseline.` }] : []
+    },
+    congestion_detection: {
+      percentage: 20,
+      level_of_service: "LOS A (Free Flow)",
+      headway_distance_km: 14.5,
+      delay_impact_minutes: 2,
+      crossing_conflict_risk: "Low",
+      bottleneck_node: "Clear Route",
+    },
+    future_delays: {
+      p10_optimistic: Math.max(0, delay - 2),
+      p50_expected: delay + 4,
+      p90_pessimistic: delay + 12,
+      recovery_potential: "Moderate",
+      cascade_risk: "Low",
+      expected_terminal_delay: delay + 4,
+    },
+    delay_reasons: [
+      {
+        id: "section_clearance",
+        category: "Signaling & Traffic",
+        title: "Section Line Clearance & Signaling Regulation",
+        impact_minutes: delay || 2,
+        severity: delay > 15 ? "Medium" : "Low",
+        location: status.live?.current_station_name || "Section Outer",
+        description: status.live?.primary_delay_reason || "Scheduled line clearance.",
+        official_code: "IR-SIG-01",
+        recovery_outlook: "Good: Corridor clear ahead.",
+        icon_type: "signal"
+      }
+    ],
+    primary_delay_reason: {
+      id: "section_clearance",
+      category: "Signaling & Traffic",
+      title: "Section Line Clearance & Signaling Regulation",
+      impact_minutes: delay || 2,
+      severity: delay > 15 ? "Medium" : "Low",
+      location: status.live?.current_station_name || "Section Outer",
+      description: status.live?.primary_delay_reason || "Scheduled line clearance.",
+      official_code: "IR-SIG-01",
+      recovery_outlook: "Good: Corridor clear ahead.",
+      icon_type: "signal"
+    },
+    delay_attribution_breakdown: [
+      { category: "Signaling & Traffic", minutes: delay || 2, percentage: 70, color: "red" },
+      { category: "Station Operations", minutes: 1, percentage: 30, color: "blue" }
+    ],
+  };
 }
 
 export function getMockDelayHistory(trainNo) {
   return MOCK_DELAY_HISTORY[trainNo] || { train_no: trainNo, avg_delay_by_station: {}, history: [] };
 }
+

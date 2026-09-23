@@ -60,7 +60,7 @@ export default function TrainSearch({ backendOnline }) {
         <div className="text-center py-12 bg-white rounded-2xl border border-slate-200">
           <AlertCircle size={32} className="mx-auto mb-3 text-slate-300" />
           <p className="text-slate-600 font-medium">No trains found for "{query}"</p>
-          <p className="text-slate-400 text-sm mt-1">Try searching by train number: 12723, 12759, or 17201</p>
+          <p className="text-slate-400 text-sm mt-1">Try searching by train number (e.g. 20607, 12951, 12723, 22691) or train name (e.g. Vande Bharat, Rajdhani)</p>
         </div>
       )}
 
